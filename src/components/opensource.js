@@ -4,7 +4,7 @@ class Opensource extends React.Component {
   render () {
     return (
 
-          <section id="os" className="os-area pt-15 pb-130">
+          <section id="oss" className="os-area pt-15 pb-130">
           <div className="container">
             
             <div className="row justify-content-center">
@@ -24,6 +24,17 @@ class Opensource extends React.Component {
                   <div className="os-content">
                     <h4 className="os-title"><a className="fs-5 text" href="https://dev.to/yuvan11/its-a-go-hacktoberfest-3c" target = "_blank" rel="noreferrer">HacktoberFest 2021</a></h4>
                     <span>Oct 5, 2021</span>
+                  </div>
+                </div> 
+              </div>
+              <div className="col-lg-3 col-md-4 col-sm-4">
+                <div className="single-os mt-30">
+                  <div className="os-image">
+                    <img src="assets/images/opensource/op-2.png" alt="opensource" />
+                  </div>
+                  <div className="os-content">
+                    <h4 className="os-title"><a className="fs-5 text" href="https://twitter.com/yuvaraj_11_/status/1542864789952942080?s=20&t=kmy-MkMzWhmjgywz4VoeOgyuvan11/its-a-go-hacktoberfest-3c" target = "_blank" rel="noreferrer">Binance-examples</a></h4>
+                    <span>July, 2022</span>
                   </div>
                 </div> 
               </div>

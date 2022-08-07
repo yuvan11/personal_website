@@ -26,7 +26,11 @@ const Navbar = props => {
                         <li className="nav-item"><a className="page-scroll" href="#home">Home</a></li>
                         <li className="nav-item"><a className="page-scroll" href="#about">About</a></li>
                         <li className="nav-item"><a className="page-scroll" href="#work">Portfolio</a></li>
+                        <li className="nav-item"><a className="page-scroll" href="#oss">OSS</a></li>
+                        <li className="nav-item"><a className="page-scroll" href="#swags">Swags</a></li>
                         <li className="nav-item"><a className="page-scroll" href="#blog">Blog</a></li>
+                        
+
                         
                       </ul>
                     </div>

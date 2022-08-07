@@ -11,11 +11,12 @@
     5.WORK
     6.PRICING
     7.OPEN SOURCE 
-    8.BLOG
-    9.CONTACT
-    10.FOOTER
-    11.PAGE BANNER
-    12.SINGLE BLOG PAGE
+    8.SWAGS
+    9.BLOG
+    10.CONTACT
+    11.FOOTER
+    12.PAGE BANNER
+    13.SINGLE BLOG PAGE
    
 
 -----------------------------------------------------------------------------------*/
@@ -1215,9 +1216,86 @@ p {
     .single-os:hover .os-content span {
       color: #fff; }
 
+/*===========================
+       8.SWAGS css 
+===========================*/
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .sw-area {
+    padding-top: 90px;
+    padding-bottom: 100px; } }
+@media (max-width: 767px) {
+  .sw-area {
+    padding-top: 70px;
+    padding-bottom: 80px; } }
+
+.single-sw {
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(152, 152, 152, 0.25);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(152, 152, 152, 0.25);
+  box-shadow: 0px 0px 15px 0px rgba(152, 152, 152, 0.25);
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden; }
+  .single-sw .sw-image {
+    overflow: hidden; }
+    .single-sw .sw-image img {
+      width: 100%;
+      -webkit-transition: all 0.3s ease-out 0s;
+      -moz-transition: all 0.3s ease-out 0s;
+      -ms-transition: all 0.3s ease-out 0s;
+      -o-transition: all 0.3s ease-out 0s;
+      transition: all 0.3s ease-out 0s; }
+  .single-sw .sw-content {
+    width: 75%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    padding: 25px;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s; }
+    @media (max-width: 767px) {
+      .single-sw .sw-content {
+        padding: 20px; } }
+    .single-sw .sw-content .sw-title a {
+      font-size: 22px;
+      font-weight: 600;
+      padding-bottom: 5px;
+      -webkit-transition: all 0.3s ease-out 0s;
+      -moz-transition: all 0.3s ease-out 0s;
+      -ms-transition: all 0.3s ease-out 0s;
+      -o-transition: all 0.3s ease-out 0s;
+      transition: all 0.3s ease-out 0s;
+      color: #32333c; }
+      @media (max-width: 767px) {
+        .single-sw .sw-content .sw-title a {
+          font-size: 18px; } }
+    .single-sw .sw-content span {
+      font-size: 16px;
+      color: #8a8fa3;
+      -webkit-transition: all 0.3s ease-out 0s;
+      -moz-transition: all 0.3s ease-out 0s;
+      -ms-transition: all 0.3s ease-out 0s;
+      -o-transition: all 0.3s ease-out 0s;
+      transition: all 0.3s ease-out 0s; }
+  .single-sw:hover .sw-image img {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2); }
+  .single-sw:hover .sw-content {
+    background-color: #754ef9; }
+    .single-sw:hover .sw-content .os-title a {
+      color: #fff; }
+    .single-sw:hover .sw-content span {
+      color: #fff; }
+
 
 /*===========================
-       8.BLOG css 
+       9.BLOG css 
 ===========================*/
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .blog-area {
@@ -1294,7 +1372,7 @@ p {
       color: #fff; }
 
 /*===========================
-       9.CONTACT css 
+       10.CONTACT css 
 ===========================*/
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .contact-area {
@@ -1383,7 +1461,7 @@ p.form-message.success, p.form-message.error {
   box-shadow: 0px 0px 12px 0px rgba(152, 152, 152, 0.46); }
 
 /*===========================
-       10.FOOTER css 
+       11.FOOTER css 
 ===========================*/
 .footer-widget {
   background-color: #fff; }
@@ -1481,7 +1559,7 @@ i.fa.fa-arrow-up{
 }
 
 /*===========================
-      11.PAGE BANNER css 
+      12.PAGE BANNER css 
 ===========================*/
 .page-banner {
   margin-top: 95px;
@@ -1541,7 +1619,7 @@ i.fa.fa-arrow-up{
         transform: translateY(-50%); }
 
 /*===========================
-   12.SINGLE BLOG PAGE css 
+   13.SINGLE BLOG PAGE css 
 ===========================*/
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .single-blog-page {

@@ -97,7 +97,7 @@ const colors = {
           <li className="pt-10">👨🏻‍💻 &nbsp; Most of my projects are available on <a href="https://github.com/yuvan11">Github</a> and <a href="https://gitlab.com/yuvan11">Gitlab</a>.</li>
           <li className="pt-10">👾 &nbsp; Quote: Take risks and move forward.</li>
           <li className="pt-10">📫 &nbsp; How to reach me: <a href="mailto:yuva.ram11@gmail.com">Send email</a></li>
-          <li className="pt-10">📝 &nbsp; Checkout my <a href="https://drive.google.com/file/d/1h6FW1911tKdNIACVrPdnQZ9kUggvyFa4/view?usp=sharing">Resume</a>.</li>
+          <li className="pt-10">📝 &nbsp; Checkout my <a href="https://drive.google.com/file/d/1qx4sxDoOplHSLc7H3CcnWWCtiTKiKoO2/view?usp=sharing">Resume</a>.</li>
         </ul>
         </div>
         <div className="col-xl-5 offset-xl-1 col-lg-6">

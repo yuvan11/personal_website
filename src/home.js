@@ -5,6 +5,7 @@ import Work from './components/work'
 import Blog from './components/blog'
 import Footer from './components/footer'
 import Opensource from './components/opensource';
+import Swags from './components/swags';
 
 
 
@@ -42,6 +43,7 @@ const [ spinner, setSpinner ] = useState(true);
         <About />
         <Work />
         <Opensource />
+        <Swags />
         <Blog />
         <Footer />
       
