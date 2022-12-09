@@ -85,9 +85,25 @@ class Swags extends React.Component {
                   </div>
                 </div> 
               </div> 
+              
          
             </div>
-           
+            <div className="row justify-content-center">
+            <div className="col-lg-3 col-md-4 col-sm-4">
+                <div className="single-sw mt-30">
+                  <div className="sw-image">
+                    <img src="assets/images/swags/sw-7.jpg" alt="Google cloud Ready Challeenge 1" />
+                  </div>
+                  <div className="sw-content">
+                    <h4 className="sw-title"><a className="fs-5 text" href="https://twitter.com/yuvaraj_11_/status/1571771768934924288" target = "_blank" rel="noreferrer">Google Cloud Ready <span> Google</span></a></h4>
+                    <span>Sep 19, 2022</span>
+                  </div>
+                </div> 
+              </div>
+         
+              
+         
+            </div>
 
           </div> 
         </section>
