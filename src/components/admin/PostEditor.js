@@ -29,22 +29,23 @@ const PostEditor = () => {
 
   const uploadImageToCDN = async (file) => {
     const formData = new FormData();
-    formData.append('reqtype', 'fileupload');
-    formData.append('fileToUpload', file);
+    formData.append('key', '6d207e02198a847aa98d0a2a901485a5');
+    formData.append('action', 'upload');
+    formData.append('source', file);
 
     try {
-      const res = await fetch('https://catbox.moe/user/api.php', {
+      const res = await fetch('https://freeimage.host/api/1/upload', {
         method: 'POST',
         body: formData,
       });
       if (res.ok) {
-        const url = await res.text();
-        if (url && url.trim().startsWith('http')) {
-          return url.trim();
+        const data = await res.json();
+        if (data && data.image && data.image.url) {
+          return data.image.url;
         }
       }
     } catch (err) {
-      console.warn('Catbox CDN upload failed, fallback to base64', err);
+      console.warn('CDN upload failed, fallback to base64', err);
     }
 
     return new Promise((resolve) => {
