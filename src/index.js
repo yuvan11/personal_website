@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import './admin.css';
 import Home from './home';
@@ -21,30 +21,11 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
-// Compute clean basename for both localhost and GitHub Pages
-const getBasename = () => {
-  const publicUrl = process.env.PUBLIC_URL || '';
-  // If publicUrl has full domain (like https://yuvan11.github.io/personal_website), extract path
-  if (publicUrl.startsWith('http')) {
-    try {
-      const url = new URL(publicUrl);
-      return url.pathname;
-    } catch {
-      return '/personal_website';
-    }
-  }
-  return publicUrl;
-};
-
-const basename = getBasename();
-
 const App = () => {
   return (
-    <BrowserRouter basename={basename}>
+    <HashRouter>
       <Routes>
-        <Route index element={<Home />} />
         <Route path="/" element={<Home />} />
-        <Route path="" element={<Home />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route
           path="/admin"
@@ -72,7 +53,7 @@ const App = () => {
         />
         <Route path="*" element={<Home />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
