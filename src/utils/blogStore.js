@@ -1,5 +1,4 @@
-// Blog post storage using localStorage
-// Schema: { id, title, slug, excerpt, content (HTML), coverImage, category, date, published }
+import initialPosts from '../data/posts.json';
 
 const STORAGE_KEY = 'yuva_blog_posts';
 
@@ -16,10 +15,39 @@ const slugify = (text) =>
 export const getAllPosts = () => {
   try {
     const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
+    if (!data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialPosts));
+      return initialPosts;
+    }
+    const localPosts = JSON.parse(data);
+    // Ensure all static initialPosts exist in local storage
+    const existingIds = new Set(localPosts.map((p) => p.id));
+    let hasNew = false;
+    for (const post of initialPosts) {
+      if (!existingIds.has(post.id)) {
+        localPosts.push(post);
+        hasNew = true;
+      }
+    }
+    if (hasNew) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(localPosts));
+    }
+    return localPosts;
   } catch {
-    return [];
+    return initialPosts || [];
   }
+};
+
+export const exportPostsJSON = () => {
+  const posts = getAllPosts();
+  const jsonStr = JSON.stringify(posts, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'posts.json';
+  a.click();
+  URL.revokeObjectURL(url);
 };
 
 export const getPublishedPosts = () => {

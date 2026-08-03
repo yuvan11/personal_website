@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getAllPosts, deletePost, togglePublished, logout } from '../../utils/blogStore';
+import { useNavigate, Link } from 'react-router-dom';
+import { getAllPosts, deletePost, togglePublished, logout, exportPostsJSON } from '../../utils/blogStore';
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
     <div className="admin-page">
       <div className="admin-header">
         <div className="admin-header-left">
-          <a href="/" className="admin-brand-logo">YR</a>
+          <Link to="/" className="admin-brand-logo">YR</Link>
           <div>
             <h1>Dashboard</h1>
             <p>Manage your writings</p>
@@ -54,6 +54,9 @@ const AdminDashboard = () => {
         <div className="admin-header-right">
           <button className="admin-btn admin-btn-primary" onClick={() => navigate('/admin/new')}>
             <i className="fa-solid fa-plus"></i> New Post
+          </button>
+          <button className="admin-btn admin-btn-secondary" onClick={exportPostsJSON} title="Download posts.json to commit to git">
+            <i className="fa-solid fa-download"></i> Export posts.json
           </button>
           <button className="admin-btn admin-btn-ghost" onClick={handleLogout}>
             <i className="fa-solid fa-right-from-bracket"></i> Logout

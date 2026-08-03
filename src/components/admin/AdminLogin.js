@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { login } from '../../utils/blogStore';
 
 const AdminLogin = ({ onLogin }) => {
@@ -47,9 +48,9 @@ const AdminLogin = ({ onLogin }) => {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-        <a href="/" className="admin-back-link">
+        <Link to="/" className="admin-back-link">
           <i className="fa-solid fa-arrow-left"></i> Back to site
-        </a>
+        </Link>
       </div>
     </div>
   );
