@@ -22,9 +22,37 @@ const PostEditor = () => {
   const [coverPreview, setCoverPreview] = useState('');
   const [isPreview, setIsPreview] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [savedMessage, setSavedMessage] = useState('');
 
   const isEditing = Boolean(id);
+
+  const uploadImageToCDN = async (file) => {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const res = await fetch('https://api.imgur.com/3/image', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Client-ID 546c25a59c58ad7',
+        },
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success && data.data && data.data.link) {
+        return data.data.link;
+      }
+    } catch (err) {
+      console.warn('Imgur upload failed, fallback to base64', err);
+    }
+
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (event) => resolve(event.target.result);
+      reader.readAsDataURL(file);
+    });
+  };
 
   useEffect(() => {
     if (id) {
@@ -60,22 +88,29 @@ const PostEditor = () => {
     fileInputRef.current?.click();
   };
 
-  const handleFileSelect = (e) => {
+  const handleFileSelect = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    if (file.size > 2 * 1024 * 1024) {
-      alert('Image size should be under 2MB. Consider using an image URL instead.');
+    if (file.size > 10 * 1024 * 1024) {
+      alert('Image size should be under 10MB.');
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const img = `<img src="${event.target.result}" alt="uploaded image" style="max-width:100%;border-radius:12px;margin:1rem 0;" />`;
+    setUploadingImage(true);
+    showSaved('Uploading image to CDN...');
+
+    try {
+      const imageUrl = await uploadImageToCDN(file);
+      const img = `<img src="${imageUrl}" alt="uploaded image" style="max-width:100%;border-radius:12px;margin:1rem 0;" />`;
       execCommand('insertHTML', img);
-    };
-    reader.readAsDataURL(file);
-    e.target.value = '';
+      showSaved('Image uploaded to CDN!');
+    } catch (err) {
+      alert('Failed to upload image');
+    } finally {
+      setUploadingImage(false);
+      e.target.value = '';
+    }
   };
 
   const handleImageUrl = () => {
@@ -97,22 +132,29 @@ const PostEditor = () => {
     coverInputRef.current?.click();
   };
 
-  const handleCoverFileSelect = (e) => {
+  const handleCoverFileSelect = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    if (file.size > 1 * 1024 * 1024) {
-      alert('Cover image should be under 1MB for optimal performance.');
+    if (file.size > 10 * 1024 * 1024) {
+      alert('Cover image size should be under 10MB.');
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setCoverImage(event.target.result);
-      setCoverPreview(event.target.result);
-    };
-    reader.readAsDataURL(file);
-    e.target.value = '';
+    setUploadingImage(true);
+    showSaved('Uploading cover image to CDN...');
+
+    try {
+      const imageUrl = await uploadImageToCDN(file);
+      setCoverImage(imageUrl);
+      setCoverPreview(imageUrl);
+      showSaved('Cover image uploaded!');
+    } catch (err) {
+      alert('Failed to upload cover image');
+    } finally {
+      setUploadingImage(false);
+      e.target.value = '';
+    }
   };
 
   const handleCoverUrl = () => {
@@ -189,14 +231,14 @@ const PostEditor = () => {
           <button
             className="admin-btn admin-btn-secondary"
             onClick={() => handleSave(false)}
-            disabled={saving}
+            disabled={saving || uploadingImage}
           >
             Save Draft
           </button>
           <button
             className="admin-btn admin-btn-primary"
             onClick={() => handleSave(true)}
-            disabled={saving}
+            disabled={saving || uploadingImage}
           >
             <i className="fa-solid fa-paper-plane"></i> Publish
           </button>
@@ -233,10 +275,10 @@ const PostEditor = () => {
               </div>
             ) : (
               <div className="editor-cover-actions">
-                <button className="admin-btn admin-btn-sm" onClick={handleCoverUpload} type="button">
-                  <i className="fa-solid fa-upload"></i> Upload
+                <button className="admin-btn admin-btn-sm" onClick={handleCoverUpload} type="button" disabled={uploadingImage}>
+                  <i className="fa-solid fa-upload"></i> {uploadingImage ? 'Uploading...' : 'Upload'}
                 </button>
-                <button className="admin-btn admin-btn-sm" onClick={handleCoverUrl} type="button">
+                <button className="admin-btn admin-btn-sm" onClick={handleCoverUrl} type="button" disabled={uploadingImage}>
                   <i className="fa-solid fa-link"></i> URL
                 </button>
               </div>
