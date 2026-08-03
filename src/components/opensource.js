@@ -10,7 +10,7 @@ const ossProjects = [
   {
     title: 'Binance-examples',
     image: 'assets/images/opensource/op-2.png',
-    link: 'https://twitter.com/yuvaraj_11_/status/1542864789952942080',
+    link: 'https://x.com/yuvaraj_11_/status/1542864789952942080',
     date: 'July, 2022',
   },
 ];
