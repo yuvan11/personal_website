@@ -29,22 +29,22 @@ const PostEditor = () => {
 
   const uploadImageToCDN = async (file) => {
     const formData = new FormData();
-    formData.append('image', file);
+    formData.append('reqtype', 'fileupload');
+    formData.append('fileToUpload', file);
 
     try {
-      const res = await fetch('https://api.imgur.com/3/image', {
+      const res = await fetch('https://catbox.moe/user/api.php', {
         method: 'POST',
-        headers: {
-          Authorization: 'Client-ID 546c25a59c58ad7',
-        },
         body: formData,
       });
-      const data = await res.json();
-      if (data.success && data.data && data.data.link) {
-        return data.data.link;
+      if (res.ok) {
+        const url = await res.text();
+        if (url && url.trim().startsWith('http')) {
+          return url.trim();
+        }
       }
     } catch (err) {
-      console.warn('Imgur upload failed, fallback to base64', err);
+      console.warn('Catbox CDN upload failed, fallback to base64', err);
     }
 
     return new Promise((resolve) => {
