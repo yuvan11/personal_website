@@ -1,37 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-export default function ScrollToTop() {
+const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Show button when page is scorlled upto given distance
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.pageYOffset > 300);
+    };
 
-  // Set the top cordinate to 0
-  // make scrolling smooth
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: 'smooth',
     });
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
-  }, []);
+  if (!isVisible) return null;
 
   return (
     <div className="scroll-to-top">
-      {isVisible && 
-        <div className="float-right" onClick={scrollToTop}>
-          <i className="fa fa-arrow-up " style={{ color : 'white' }} aria-hidden="true"></i>
-  
-        </div>}
+      <div
+        className="float-right"
+        onClick={scrollToTop}
+        role="button"
+        tabIndex={0}
+        aria-label="Scroll to top"
+        onKeyDown={(e) => e.key === 'Enter' && scrollToTop()}
+      >
+        <i className="fa-solid fa-arrow-up" aria-hidden="true"></i>
+      </div>
     </div>
   );
-}
+};
+
+export default ScrollToTop;
