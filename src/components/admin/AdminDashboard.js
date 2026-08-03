@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { getAllPosts, deletePost, togglePublished, logout } from '../../utils/blogStore';
+import { getAllPosts, deletePost, togglePublished, logout, fetchCloudPosts } from '../../utils/blogStore';
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState([]);
@@ -8,12 +8,14 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setPosts(getAllPosts());
+    fetchCloudPosts().then((cloudPosts) => {
+      setPosts(cloudPosts || getAllPosts());
+    });
   }, []);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (deleteConfirm === id) {
-      deletePost(id);
+      await deletePost(id);
       setPosts(getAllPosts());
       setDeleteConfirm(null);
     } else {
@@ -22,8 +24,8 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleTogglePublish = (id) => {
-    togglePublished(id);
+  const handleTogglePublish = async (id) => {
+    await togglePublished(id);
     setPosts(getAllPosts());
   };
 

@@ -175,17 +175,18 @@ const PostEditor = () => {
     setTimeout(() => setSavedMessage(''), 2500);
   };
 
-  const handleSave = (publish) => {
+  const handleSave = async (publish) => {
     if (!title.trim()) {
       alert('Please enter a title');
       return;
     }
 
     setSaving(true);
+    showSaved('Saving & Syncing to Cloud...');
     const content = editorRef.current?.innerHTML || '';
 
     if (isEditing) {
-      updatePost(id, {
+      await updatePost(id, {
         title: title.trim(),
         excerpt: excerpt.trim(),
         content,
@@ -193,9 +194,9 @@ const PostEditor = () => {
         category,
         published: publish,
       });
-      showSaved(publish ? 'Published!' : 'Saved as draft!');
+      showSaved(publish ? 'Published & Synced!' : 'Saved draft!');
     } else {
-      createPost({
+      await createPost({
         title: title.trim(),
         excerpt: excerpt.trim(),
         content,
@@ -203,7 +204,7 @@ const PostEditor = () => {
         category,
         published: publish,
       });
-      showSaved(publish ? 'Published!' : 'Saved as draft!');
+      showSaved(publish ? 'Published & Synced!' : 'Saved draft!');
       setTimeout(() => navigate('/admin'), 1200);
     }
 

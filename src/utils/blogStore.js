@@ -85,7 +85,7 @@ export const getPostById = (id) => {
   return getAllPosts().find((p) => p.id === id) || null;
 };
 
-export const createPost = ({ title, excerpt, content, coverImage, category, published }) => {
+export const createPost = async ({ title, excerpt, content, coverImage, category, published }) => {
   const posts = getAllPosts();
   let slug = slugify(title);
 
@@ -112,11 +112,11 @@ export const createPost = ({ title, excerpt, content, coverImage, category, publ
 
   posts.unshift(newPost);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-  syncCloudStore(posts);
+  await syncCloudStore(posts);
   return newPost;
 };
 
-export const updatePost = (id, updates) => {
+export const updatePost = async (id, updates) => {
   const posts = getAllPosts();
   const index = posts.findIndex((p) => p.id === id);
   if (index === -1) return null;
@@ -136,20 +136,20 @@ export const updatePost = (id, updates) => {
 
   posts[index] = { ...posts[index], ...updates };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-  syncCloudStore(posts);
+  await syncCloudStore(posts);
   return posts[index];
 };
 
-export const deletePost = (id) => {
+export const deletePost = async (id) => {
   const posts = getAllPosts().filter((p) => p.id !== id);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-  syncCloudStore(posts);
+  await syncCloudStore(posts);
 };
 
-export const togglePublished = (id) => {
+export const togglePublished = async (id) => {
   const post = getPostById(id);
   if (!post) return null;
-  return updatePost(id, { published: !post.published });
+  return await updatePost(id, { published: !post.published });
 };
 
 // Auth helpers
