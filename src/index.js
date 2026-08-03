@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import './admin.css';
 import Home from './home';
@@ -23,7 +23,7 @@ const AdminRoute = ({ children }) => {
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
@@ -52,7 +52,7 @@ const App = () => {
           }
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
