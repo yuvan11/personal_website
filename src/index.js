@@ -21,14 +21,30 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
-// Dynamic basename: "" locally, "/personal_website" on GitHub Pages
-const basename = process.env.PUBLIC_URL || '';
+// Compute clean basename for both localhost and GitHub Pages
+const getBasename = () => {
+  const publicUrl = process.env.PUBLIC_URL || '';
+  // If publicUrl has full domain (like https://yuvan11.github.io/personal_website), extract path
+  if (publicUrl.startsWith('http')) {
+    try {
+      const url = new URL(publicUrl);
+      return url.pathname;
+    } catch {
+      return '/personal_website';
+    }
+  }
+  return publicUrl;
+};
+
+const basename = getBasename();
 
 const App = () => {
   return (
     <BrowserRouter basename={basename}>
       <Routes>
+        <Route index element={<Home />} />
         <Route path="/" element={<Home />} />
+        <Route path="" element={<Home />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route
           path="/admin"
