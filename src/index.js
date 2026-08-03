@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import './admin.css';
 import Home from './home';
+import AboutPage from './components/AboutPage';
 import BlogPost from './components/BlogPost';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
@@ -21,11 +22,31 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
+// Compute clean basename for both localhost and GitHub Pages
+const getBasename = () => {
+  const publicUrl = process.env.PUBLIC_URL || '';
+  if (publicUrl.startsWith('http')) {
+    try {
+      const url = new URL(publicUrl);
+      return url.pathname;
+    } catch {
+      return '/personal_website';
+    }
+  }
+  return publicUrl;
+};
+
+const basename = getBasename();
+
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter basename={basename}>
       <Routes>
+        <Route index element={<Home />} />
         <Route path="/" element={<Home />} />
+        <Route path="" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/aboutme" element={<AboutPage />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route
           path="/admin"
@@ -53,7 +74,7 @@ const App = () => {
         />
         <Route path="*" element={<Home />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

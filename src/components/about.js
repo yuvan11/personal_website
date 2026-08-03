@@ -1,108 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react';
-
-const skills = [
-  { type: 'Go', level: 95 },
-  { type: 'AWS / Azure', level: 90 },
-  { type: 'Docker / K8s', level: 85 },
-  { type: 'Redis / SQL', level: 85 },
-  { type: 'Microservices', level: 90 },
-  { type: 'Angular', level: 80 },
-  { type: 'Terraform', level: 75 },
-  { type: 'Git', level: 90 },
-];
-
-const SkillBar = ({ name, level, animate }) => (
-  <div className="custom-skill">
-    <div className="custom-skill-label">
-      <span className="custom-skill-name">{name}</span>
-      <span className="custom-skill-percent">{level}%</span>
-    </div>
-    <div className="custom-skill-track">
-      <div
-        className="custom-skill-fill"
-        style={{ width: animate ? `${level}%` : '0%' }}
-      />
-    </div>
-  </div>
-);
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const About = () => {
-  const [animate, setAnimate] = useState(false);
-  const skillRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setAnimate(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (skillRef.current) {
-      observer.observe(skillRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="about" className="about-area">
+    <section id="about" className="about-area" style={{ padding: '3rem 0' }}>
       <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="section-title text-center">
-              <div className="About">
-                <div className="col-lg-12">
-                  <div className="card-body">
-                    <h2 className="card-title">About Me</h2>
-                    <p className="card-text" style={{ marginBottom: '1rem' }}>
-                      I'm a <strong>Golang Backend Engineer with 4.5+ years of experience</strong> building scalable, cloud-native microservices and distributed systems.
-                    </p>
-                    <p className="card-text" style={{ marginBottom: '1rem' }}>
-                      I specialize in designing high-performance backend services using Go, with hands-on experience in concurrency, REST APIs, containerization, and Kubernetes-based deployments. I’ve built and deployed production-ready microservices using Gin, Redis, SQL, Docker, Terraform, and cloud platforms like Azure and AWS.
-                    </p>
-                    <p className="card-text" style={{ marginBottom: '1rem' }}>
-                      With a strong foundation in cloud architecture and distributed system design, I focus on building reliable, efficient, and scalable backend systems following clean architecture principles.
-                    </p>
-                    <p className="card-text">
-                      I’m deeply passionate about Golang and actively expanding my expertise in <em>distributed systems</em>, <em>event-driven architecture</em>, <em>cloud infrastructure</em>, and <em>high-performance backend design</em>.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="mt-50 col-lg-6">
-            <h3>Highlights &amp; Core Focus:</h3>
-            <ul>
-              <li>🛠&nbsp; <strong>Core Tech Stack:</strong> Golang, Microservices, AWS, Azure, Angular, Redis, Docker, K8s &amp; Terraform.</li>
-              <li>🚀&nbsp; <strong>Experience:</strong> 4.5+ years designing, building, and deploying production-grade distributed backend systems.</li>
-              <li>👨🏻‍💻&nbsp; Open-source projects &amp; work available on <a href="https://github.com/yuvan11" target="_blank" rel="noreferrer">GitHub</a> and <a href="https://gitlab.com/yuvan11" target="_blank" rel="noreferrer">GitLab</a>.</li>
-              <li>✍️&nbsp; Apart from coding, I actively express thoughts through poems and technical writing.</li>
-              <li>📫&nbsp; How to reach me: <a href="mailto:yuva.ram11@gmail.com">Send Email</a></li>
-              <li>📝&nbsp; Checkout my <a href="https://drive.google.com/file/d/1qx4sxDoOplHSLc7H3CcnWWCtiTKiKoO2/view?usp=sharing" target="_blank" rel="noreferrer">Resume</a>.</li>
-            </ul>
-          </div>
-          <div className="col-xl-5 offset-xl-1 col-lg-6" ref={skillRef}>
-            <div className="skill-item mt-25">
-              <div className="skill-header pt-30">
-                <h3>Technical Expertise:</h3>
-                <div className="skillbar-group">
-                  {skills.map((skill) => (
-                    <SkillBar
-                      key={skill.type}
-                      name={skill.type}
-                      level={skill.level}
-                      animate={animate}
-                    />
-                  ))}
-                </div>
+        <div className="row justify-content-center">
+          <div className="col-lg-10">
+            <div className="card-body" style={{ background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', borderRadius: 'var(--radius-xl)', padding: '2rem 2.5rem', textAlign: 'center' }}>
+              <span className="eyebrow" style={{ display: 'inline-flex', marginBottom: '0.75rem', padding: '0.35rem 0.9rem', borderRadius: 'var(--radius-full)', background: 'rgba(139, 92, 246, 0.1)', border: '1px solid rgba(139, 92, 246, 0.2)', color: '#a78bfa', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                💻 Golang Backend Engineer · 4.5+ Years Exp
+              </span>
+              <h2 className="title" style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', marginBottom: '1rem', color: 'var(--text-primary)' }}>
+                Building Scalable Cloud-Native Systems
+              </h2>
+              <p className="card-text" style={{ maxWidth: '780px', margin: '0 auto 1.5rem', color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.75' }}>
+                I specialize in high-performance backend microservices using Go, AWS, Azure, Docker, Kubernetes, Gin, Redis, and Terraform. Driven by clean architecture and distributed system design.
+              </p>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <Link className="main-btn" to="/about">
+                  Learn More About Me <i className="fa-solid fa-arrow-right" style={{ marginLeft: '0.4rem' }}></i>
+                </Link>
+                <a className="main-btn main-btn-2" href="https://drive.google.com/file/d/1qx4sxDoOplHSLc7H3CcnWWCtiTKiKoO2/view?usp=sharing" target="_blank" rel="noreferrer">
+                  View Resume
+                </a>
               </div>
             </div>
           </div>

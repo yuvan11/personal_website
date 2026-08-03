@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  const isHome = location.pathname === '/';
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
@@ -23,9 +27,9 @@ const Navbar = () => {
     <div className={`navigation fixed-top${scrolled ? ' scrolled' : ''}`}>
       <div className="container">
         <nav className="navbar">
-          <a className="navbar-brand" href="#home">
+          <Link className="navbar-brand" to="/">
             <span>YR</span>
-          </a>
+          </Link>
           <button
             className="custom-toggler"
             type="button"
@@ -41,22 +45,22 @@ const Navbar = () => {
           <div className={`navbar-collapse${isNavCollapsed ? ' collapse' : ' show'}`} id="navbars">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item" onClick={handleNavClick}>
-                <a className="page-scroll" href="#home">Home</a>
+                {isHome ? <a className="page-scroll" href="#home">Home</a> : <Link to="/">Home</Link>}
               </li>
               <li className="nav-item" onClick={handleNavClick}>
-                <a className="page-scroll" href="#about">About</a>
+                <Link to="/about">About</Link>
               </li>
               <li className="nav-item" onClick={handleNavClick}>
-                <a className="page-scroll" href="#work">Portfolio</a>
+                {isHome ? <a className="page-scroll" href="#work">Portfolio</a> : <Link to="/#work">Portfolio</Link>}
               </li>
               <li className="nav-item" onClick={handleNavClick}>
-                <a className="page-scroll" href="#oss">OSS</a>
+                {isHome ? <a className="page-scroll" href="#oss">OSS</a> : <Link to="/#oss">OSS</Link>}
               </li>
               <li className="nav-item" onClick={handleNavClick}>
-                <a className="page-scroll" href="#swags">Swags</a>
+                {isHome ? <a className="page-scroll" href="#swags">Swags</a> : <Link to="/#swags">Swags</Link>}
               </li>
               <li className="nav-item" onClick={handleNavClick}>
-                <a className="page-scroll" href="#blog">Blog</a>
+                {isHome ? <a className="page-scroll" href="#blog">Blog</a> : <Link to="/#blog">Blog</Link>}
               </li>
             </ul>
           </div>
