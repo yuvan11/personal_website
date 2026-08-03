@@ -1,5 +1,3 @@
-import defaultPosts from '../data/posts';
-
 const STORAGE_KEY = 'yuva_blog_posts';
 const API_URL = 'https://jsonblob.com/api/jsonBlob/019fc91d-26bd-7bdf-b5d7-fa68e11333ef';
 
@@ -45,22 +43,12 @@ export const fetchCloudPosts = async () => {
 };
 
 export const getAllPosts = () => {
-  let localPosts = [];
   try {
     const data = localStorage.getItem(STORAGE_KEY);
-    localPosts = data ? JSON.parse(data) : [];
+    return data ? JSON.parse(data) : [];
   } catch {
-    localPosts = [];
+    return [];
   }
-
-  const localIds = new Set(localPosts.map((p) => p.id));
-  const merged = [...localPosts];
-  for (const post of defaultPosts) {
-    if (!localIds.has(post.id)) {
-      merged.push(post);
-    }
-  }
-  return merged;
 };
 
 export const getPublishedPosts = () => {
