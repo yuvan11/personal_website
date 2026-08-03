@@ -3,13 +3,17 @@ const API_URL = 'https://jsonblob.com/api/jsonBlob/019fc91d-26bd-7bdf-b5d7-fa68e
 
 const generateId = () => `post_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-const slugify = (text) =>
-  text
+const slugify = (text) => {
+  if (!text) return `post-${Date.now()}`;
+  const slug = text
+    .trim()
     .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
+    .replace(/[\s_]+/g, '-')
+    .replace(/[^\p{L}\p{N}-]/gu, '')
     .replace(/-+/g, '-')
-    .trim();
+    .replace(/^-+|-+$/g, '');
+  return slug || `post-${Date.now().toString(36)}`;
+};
 
 const syncCloudStore = async (posts) => {
   try {
@@ -58,7 +62,23 @@ export const getPublishedPosts = () => {
 };
 
 export const getPostBySlug = (slug) => {
-  return getAllPosts().find((p) => p.slug === slug) || null;
+  if (!slug) return null;
+  let decoded = slug;
+  try {
+    decoded = decodeURIComponent(slug);
+  } catch {
+    decoded = slug;
+  }
+  const posts = getAllPosts();
+  return (
+    posts.find(
+      (p) =>
+        p.slug === slug ||
+        p.slug === decoded ||
+        decodeURIComponent(p.slug) === decoded ||
+        p.slug.toLowerCase() === decoded.toLowerCase()
+    ) || null
+  );
 };
 
 export const getPostById = (id) => {
