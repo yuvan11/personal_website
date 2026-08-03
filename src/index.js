@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import './admin.css';
 import Home from './home';
@@ -21,9 +21,11 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
+const basename = process.env.PUBLIC_URL || '/personal_website';
+
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter basename={basename}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
@@ -51,8 +53,10 @@ const App = () => {
             </AdminRoute>
           }
         />
+        {/* Fallback route to catch any subpath variations */}
+        <Route path="*" element={<Home />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
