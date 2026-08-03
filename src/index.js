@@ -28,12 +28,19 @@ const getBasename = () => {
   if (publicUrl.startsWith('http')) {
     try {
       const url = new URL(publicUrl);
-      return url.pathname;
+      const pathname = url.pathname.replace(/\/$/, '');
+      return pathname || '/personal_website';
     } catch {
       return '/personal_website';
     }
   }
-  return publicUrl;
+  if (!publicUrl || publicUrl === '.') {
+    if (typeof window !== 'undefined' && window.location.pathname.startsWith('/personal_website')) {
+      return '/personal_website';
+    }
+    return '';
+  }
+  return publicUrl.replace(/\/$/, '');
 };
 
 const basename = getBasename();
