@@ -1,18 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const skills = [
-  { type: 'Go', level: 90 },
-  { type: 'Java', level: 90 },
-  { type: 'C', level: 90 },
-  { type: 'C#', level: 85 },
+  { type: 'Go', level: 95 },
+  { type: 'AWS / Azure', level: 90 },
+  { type: 'Docker / K8s', level: 85 },
+  { type: 'Redis / SQL', level: 85 },
+  { type: 'Microservices', level: 90 },
+  { type: 'Angular', level: 80 },
+  { type: 'Terraform', level: 75 },
   { type: 'Git', level: 90 },
-  { type: 'NoSQL', level: 80 },
-  { type: 'Angular', level: 85 },
-  { type: 'React', level: 80 },
-  { type: 'Azure', level: 65 },
-  { type: 'Spring', level: 60 },
-  { type: 'Docker', level: 50 },
-  { type: 'Kubernetes', level: 50 },
 ];
 
 const SkillBar = ({ name, level, animate }) => (
@@ -61,9 +57,18 @@ const About = () => {
               <div className="About">
                 <div className="col-lg-12">
                   <div className="card-body">
-                    <h2 className="card-title">About</h2>
+                    <h2 className="card-title">About Me</h2>
+                    <p className="card-text" style={{ marginBottom: '1rem' }}>
+                      I'm a <strong>Golang Backend Engineer with 4.5+ years of experience</strong> building scalable, cloud-native microservices and distributed systems.
+                    </p>
+                    <p className="card-text" style={{ marginBottom: '1rem' }}>
+                      I specialize in designing high-performance backend services using Go, with hands-on experience in concurrency, REST APIs, containerization, and Kubernetes-based deployments. I’ve built and deployed production-ready microservices using Gin, Redis, SQL, Docker, Terraform, and cloud platforms like Azure and AWS.
+                    </p>
+                    <p className="card-text" style={{ marginBottom: '1rem' }}>
+                      With a strong foundation in cloud architecture and distributed system design, I focus on building reliable, efficient, and scalable backend systems following clean architecture principles.
+                    </p>
                     <p className="card-text">
-                      I'm a graduated student holding a bachelor degree in Information Technology 🎓 from SJIT 🏛. I love to work with full-stack development and also love to contribute open-source 🎯. I'm a passionate learner and developer who's always willing to learn and work across technologies and domains 💡. I love to explore new technologies and leverage them to solve real-life problems ✨. Apart from that I also love to guide and mentor newbies 👨🏻‍💻. I'm currently into Web Development 🕸️ and working on my Data Structures and Algorithms 🤓.
+                      I’m deeply passionate about Golang and actively expanding my expertise in <em>distributed systems</em>, <em>event-driven architecture</em>, <em>cloud infrastructure</em>, and <em>high-performance backend design</em>.
                     </p>
                   </div>
                 </div>
@@ -74,20 +79,20 @@ const About = () => {
 
         <div className="row">
           <div className="mt-50 col-lg-6">
-            <h3>Personal Stuffs:</h3>
+            <h3>Highlights &amp; Core Focus:</h3>
             <ul>
-              <li>🛠&nbsp; I'm currently working with Go, Java, C#, .Net, React, Angular, Azure, GCP etc...</li>
-              <li>🚀&nbsp; I'm currently working in Full Stack Development and also learning DevOps.</li>
-              <li>👨🏻‍💻&nbsp; Most of my projects are available on <a href="https://github.com/yuvan11">Github</a> and <a href="https://gitlab.com/yuvan11">Gitlab</a>.</li>
-              <li>👾&nbsp; Quote: Take risks and move forward.</li>
-              <li>📫&nbsp; How to reach me: <a href="mailto:yuva.ram11@gmail.com">Send email</a></li>
-              <li>📝&nbsp; Checkout my <a href="https://drive.google.com/file/d/1qx4sxDoOplHSLc7H3CcnWWCtiTKiKoO2/view?usp=sharing">Resume</a>.</li>
+              <li>🛠&nbsp; <strong>Core Tech Stack:</strong> Golang, Microservices, AWS, Azure, Angular, Redis, Docker, K8s &amp; Terraform.</li>
+              <li>🚀&nbsp; <strong>Experience:</strong> 4.5+ years designing, building, and deploying production-grade distributed backend systems.</li>
+              <li>👨🏻‍💻&nbsp; Open-source projects &amp; work available on <a href="https://github.com/yuvan11" target="_blank" rel="noreferrer">GitHub</a> and <a href="https://gitlab.com/yuvan11" target="_blank" rel="noreferrer">GitLab</a>.</li>
+              <li>✍️&nbsp; Apart from coding, I actively express thoughts through poems and technical writing.</li>
+              <li>📫&nbsp; How to reach me: <a href="mailto:yuva.ram11@gmail.com">Send Email</a></li>
+              <li>📝&nbsp; Checkout my <a href="https://drive.google.com/file/d/1qx4sxDoOplHSLc7H3CcnWWCtiTKiKoO2/view?usp=sharing" target="_blank" rel="noreferrer">Resume</a>.</li>
             </ul>
           </div>
           <div className="col-xl-5 offset-xl-1 col-lg-6" ref={skillRef}>
             <div className="skill-item mt-25">
               <div className="skill-header pt-30">
-                <h3>Technical Skills:</h3>
+                <h3>Technical Expertise:</h3>
                 <div className="skillbar-group">
                   {skills.map((skill) => (
                     <SkillBar

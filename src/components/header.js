@@ -13,22 +13,22 @@ const Header = () => {
                 <h4 className="sub-title">Hello, I'm</h4>
                 <h1 className="title">Yuvaraj R</h1>
                 <p className="header-description">
-                  I write code and poetry — building software by day and exploring ideas through words. I love open source, creative writing, and turning curiosity into something meaningful.
+                  Golang Backend Engineer with 4.5+ years of experience building scalable, cloud-native microservices and distributed systems. Passionate about open source, clean architecture, and creative writing.
                 </p>
                 <div className="header-actions">
                   <a className="main-btn" href="#work">View My Work</a>
                   <a className="main-btn main-btn-2" href="#blog">Read My Writings</a>
                 </div>
                 <ul className="hero-stats">
-                  <li>Developer & Writer</li>
+                  <li>Backend Engineer</li>
                   <li>Open Source Contributor</li>
-                  <li>Curious Mind</li>
+                  <li>Golang · AWS · Azure</li>
                 </ul>
               </div>
             </div>
             <div className="col-lg-6 offset-xl-1">
               <div className="header-image">
-                <img src="assets/images/banner/profile.png" alt="Yuvaraj R — Full Stack Developer" />
+                <img src="assets/images/banner/profile.png" alt="Yuvaraj R — Golang Backend Engineer" />
               </div>
             </div>
           </div>
