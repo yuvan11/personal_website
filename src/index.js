@@ -21,7 +21,8 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
-const basename = process.env.PUBLIC_URL || '/personal_website';
+// Dynamic basename: "" locally, "/personal_website" on GitHub Pages
+const basename = process.env.PUBLIC_URL || '';
 
 const App = () => {
   return (
@@ -53,7 +54,6 @@ const App = () => {
             </AdminRoute>
           }
         />
-        {/* Fallback route to catch any subpath variations */}
         <Route path="*" element={<Home />} />
       </Routes>
     </BrowserRouter>
