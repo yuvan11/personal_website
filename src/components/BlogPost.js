@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getPostBySlug } from '../utils/blogStore';
+import { getPostBySlug, fetchCloudPosts } from '../utils/blogStore';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -9,12 +9,19 @@ const BlogPost = () => {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    const found = getPostBySlug(slug);
-    if (found && found.published) {
-      setPost(found);
-    } else {
-      setNotFound(true);
-    }
+    const load = async () => {
+      let found = getPostBySlug(slug);
+      if (!found) {
+        await fetchCloudPosts();
+        found = getPostBySlug(slug);
+      }
+      if (found && found.published) {
+        setPost(found);
+      } else {
+        setNotFound(true);
+      }
+    };
+    load();
   }, [slug]);
 
   useEffect(() => {

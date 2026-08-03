@@ -1,6 +1,7 @@
 import defaultPosts from '../data/posts';
 
 const STORAGE_KEY = 'yuva_blog_posts';
+const API_URL = 'https://jsonblob.com/api/jsonBlob/019fc91d-26bd-7bdf-b5d7-fa68e11333ef';
 
 const generateId = () => `post_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
@@ -11,6 +12,37 @@ const slugify = (text) =>
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .trim();
+
+const syncCloudStore = async (posts) => {
+  try {
+    await fetch(API_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(posts),
+    });
+  } catch (err) {
+    console.warn('Cloud sync failed:', err);
+  }
+};
+
+export const fetchCloudPosts = async () => {
+  try {
+    const res = await fetch(API_URL);
+    if (res.ok) {
+      const posts = await res.json();
+      if (Array.isArray(posts) && posts.length > 0) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+        return posts;
+      }
+    }
+  } catch (err) {
+    console.warn('Cloud fetch failed:', err);
+  }
+  return getAllPosts();
+};
 
 export const getAllPosts = () => {
   let localPosts = [];
@@ -72,6 +104,7 @@ export const createPost = ({ title, excerpt, content, coverImage, category, publ
 
   posts.unshift(newPost);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  syncCloudStore(posts);
   return newPost;
 };
 
@@ -95,12 +128,14 @@ export const updatePost = (id, updates) => {
 
   posts[index] = { ...posts[index], ...updates };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  syncCloudStore(posts);
   return posts[index];
 };
 
 export const deletePost = (id) => {
   const posts = getAllPosts().filter((p) => p.id !== id);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  syncCloudStore(posts);
 };
 
 export const togglePublished = (id) => {

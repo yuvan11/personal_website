@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getPublishedPosts } from '../utils/blogStore';
+import { getPublishedPosts, fetchCloudPosts } from '../utils/blogStore';
 
 // Existing hardcoded blog posts (from WordPress / external links)
 const existingPosts = [
@@ -119,9 +119,15 @@ const BlogCard = ({ post }) => {
 };
 
 const Blog = () => {
-  // Get CMS posts and merge with existing
-  const cmsPosts = getPublishedPosts();
-  const allPosts = [...cmsPosts, ...existingPosts];
+  const [posts, setPosts] = useState(getPublishedPosts());
+
+  useEffect(() => {
+    fetchCloudPosts().then(() => {
+      setPosts(getPublishedPosts());
+    });
+  }, []);
+
+  const allPosts = [...posts, ...existingPosts];
 
   return (
     <section id="blog" className="blog-area">
