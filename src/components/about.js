@@ -21,8 +21,8 @@ const About = () => {
                 <Link className="main-btn" to="/about">
                   Learn More About Me <i className="fa-solid fa-arrow-right" style={{ marginLeft: '0.4rem' }}></i>
                 </Link>
-                <a className="main-btn main-btn-2" href="https://drive.google.com/file/d/1qx4sxDoOplHSLc7H3CcnWWCtiTKiKoO2/view?usp=sharing" target="_blank" rel="noreferrer">
-                  View Resume
+                <a className="main-btn main-btn-2" href="mailto:yuva.ram11@gmail.com">
+                  <i className="fa-solid fa-envelope" style={{ marginRight: '0.4rem' }}></i> Reach Out
                 </a>
               </div>
             </div>

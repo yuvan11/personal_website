@@ -88,14 +88,18 @@ const AboutPage = () => {
             {/* Quick Links Card */}
             <div style={{ marginTop: '1.5rem', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', borderRadius: 'var(--radius-lg)', padding: '1.5rem' }}>
               <h4 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>
-                Connect &amp; Resources
+                Connect &amp; Reach Out
               </h4>
               <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <li>🛠&nbsp; <strong>Core Stack:</strong> Go, AWS, Azure, Microservices, Redis, Docker, K8s, Terraform, Angular</li>
                 <li>👨🏻‍💻&nbsp; <strong>Code Repositories:</strong> <a href="https://github.com/yuvan11" target="_blank" rel="noreferrer">GitHub (yuvan11)</a> &amp; <a href="https://gitlab.com/yuvan11" target="_blank" rel="noreferrer">GitLab</a></li>
-                <li>📝&nbsp; <strong>Resume:</strong> <a href="https://drive.google.com/file/d/1qx4sxDoOplHSLc7H3CcnWWCtiTKiKoO2/view?usp=sharing" target="_blank" rel="noreferrer">View Updated Resume</a></li>
-                <li>📫&nbsp; <strong>Contact:</strong> <a href="mailto:yuva.ram11@gmail.com">yuva.ram11@gmail.com</a></li>
+                <li>📫&nbsp; <strong>Email:</strong> <a href="mailto:yuva.ram11@gmail.com">yuva.ram11@gmail.com</a></li>
               </ul>
+              <div style={{ marginTop: '1.25rem' }}>
+                <a className="main-btn" href="mailto:yuva.ram11@gmail.com">
+                  <i className="fa-solid fa-envelope" style={{ marginRight: '0.4rem' }}></i> Reach Out via Email
+                </a>
+              </div>
             </div>
           </div>
 
@@ -122,7 +126,7 @@ const AboutPage = () => {
 
       <footer className="blogpost-footer" style={{ marginTop: '3rem' }}>
         <div className="container">
-          <button className="main-btn" onClick={() => navigate('/')}>
+          <button className="main-btn main-btn-2" onClick={() => navigate('/')}>
             <i className="fa-solid fa-arrow-left"></i> Back to Homepage
           </button>
         </div>
