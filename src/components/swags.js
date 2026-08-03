@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAssetUrl } from '../utils/assetHelper';
 
 const swagItems = [
   {
@@ -69,7 +70,7 @@ const Swags = () => {
             <div className="col-lg-3 col-md-4 col-sm-4" key={swag.title}>
               <div className="single-sw mt-30">
                 <div className="sw-image">
-                  <img src={swag.image} alt={swag.title} />
+                  <img src={getAssetUrl(swag.image)} alt={swag.title} />
                 </div>
                 <div className="sw-content">
                   <h4 className="sw-title">

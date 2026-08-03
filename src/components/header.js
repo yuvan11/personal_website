@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './navbar';
+import { getAssetUrl } from '../utils/assetHelper';
 
 const Header = () => {
   return (
@@ -28,7 +29,7 @@ const Header = () => {
             </div>
             <div className="col-lg-6 offset-xl-1">
               <div className="header-image">
-                <img src="assets/images/banner/profile.png" alt="Yuvaraj R — Golang Backend Engineer" />
+                <img src={getAssetUrl('assets/images/banner/profile.png')} alt="Yuvaraj R — Golang Backend Engineer" />
               </div>
             </div>
           </div>

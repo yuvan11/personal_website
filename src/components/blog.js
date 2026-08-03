@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getPublishedPosts, fetchCloudPosts } from '../utils/blogStore';
+import { getAssetUrl } from '../utils/assetHelper';
 
 // Existing hardcoded blog posts (from WordPress / external links)
 const existingPosts = [
@@ -69,7 +70,7 @@ const BlogCard = ({ post }) => {
       <div className="col-lg-3 col-md-4 col-sm-4">
         <div className="single-blog mt-30">
           <div className="blog-image">
-            <img src={post.image} alt={post.title} />
+            <img src={getAssetUrl(post.image)} alt={post.title} />
           </div>
           <div className="blog-content">
             <h4 className="blog-title">
@@ -96,7 +97,7 @@ const BlogCard = ({ post }) => {
       <div className="single-blog mt-30">
         {post.coverImage ? (
           <div className="blog-image">
-            <img src={post.coverImage} alt={post.title} />
+            <img src={getAssetUrl(post.coverImage)} alt={post.title} />
           </div>
         ) : (
           <div className="blog-image blog-image-placeholder">

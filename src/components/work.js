@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAssetUrl } from '../utils/assetHelper';
 
 const projects = [
   { title: 'wazirx-go', image: 'assets/images/work/wazirx-go.png', link: 'https://github.com/yuvan11/wazirx-go' },
@@ -27,14 +28,14 @@ const Work = () => {
             <div className="col-lg-3 col-md-4 col-sm-4" key={project.title}>
               <div className="single-work text-center mt-30">
                 <div className="work-image">
-                  <img src={project.image} alt={project.title} />
+                  <img src={getAssetUrl(project.image)} alt={project.title} />
                 </div>
                 <div className="work-overlay">
                   <div className="work-content">
                     <h3 className="work-title">{project.title}</h3>
                     <ul>
                       <li>
-                        <a className="image-popup" href={project.image} target="_blank" rel="noreferrer" aria-label={`Preview ${project.title}`}>
+                        <a className="image-popup" href={getAssetUrl(project.image)} target="_blank" rel="noreferrer" aria-label={`Preview ${project.title}`}>
                           <i className="fa-solid fa-eye" aria-hidden="true"></i>
                         </a>
                       </li>

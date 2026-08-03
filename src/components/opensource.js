@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAssetUrl } from '../utils/assetHelper';
 
 const ossProjects = [
   {
@@ -32,7 +33,7 @@ const Opensource = () => {
             <div className="col-lg-3 col-md-4 col-sm-4" key={project.title}>
               <div className="single-os mt-30">
                 <div className="os-image">
-                  <img src={project.image} alt={project.title} />
+                  <img src={getAssetUrl(project.image)} alt={project.title} />
                 </div>
                 <div className="os-content">
                   <h4 className="os-title">
