@@ -1,3 +1,5 @@
+import defaultPosts from '../data/posts';
+
 const STORAGE_KEY = 'yuva_blog_posts';
 
 const generateId = () => `post_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -11,12 +13,22 @@ const slugify = (text) =>
     .trim();
 
 export const getAllPosts = () => {
+  let localPosts = [];
   try {
     const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
+    localPosts = data ? JSON.parse(data) : [];
   } catch {
-    return [];
+    localPosts = [];
   }
+
+  const localIds = new Set(localPosts.map((p) => p.id));
+  const merged = [...localPosts];
+  for (const post of defaultPosts) {
+    if (!localIds.has(post.id)) {
+      merged.push(post);
+    }
+  }
+  return merged;
 };
 
 export const getPublishedPosts = () => {
